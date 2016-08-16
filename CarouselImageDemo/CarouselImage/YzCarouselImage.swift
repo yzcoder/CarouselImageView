@@ -67,6 +67,10 @@ class YzCarouselImage: UIView ,UIScrollViewDelegate{
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        timer?.invalidate()
+        timer = nil
+    }
     
     private func setUI() {
         self.addSubview(mainScrollView)
