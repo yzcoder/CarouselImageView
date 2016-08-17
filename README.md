@@ -1,6 +1,6 @@
 # CarouselImageView
 A pictures-carousel-view by swift.
-#How to ues
+#How to ues ？ It's easy.
 ```
  /**
  类方法生成对象
@@ -19,5 +19,6 @@ carouselImageView.imagesArray = images
 carouselImageView.duration = 1
 ```
 #### You can get more information from demo.Clone or download the zip to view it.
+
 
 

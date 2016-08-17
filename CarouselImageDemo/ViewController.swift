@@ -31,7 +31,6 @@ class ViewController: UIViewController {
         carouselImageView.duration = 3
         
         
-        
         self.view.bringSubviewToFront(editLabel)
     }
 
