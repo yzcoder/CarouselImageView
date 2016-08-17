@@ -12,17 +12,29 @@ private let ScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
 
 class YzCarouselImage: UIView ,UIScrollViewDelegate{
     
-    
+    //图片数据源
     var imagesArray : NSArray! {
         didSet {
             self.loadPage()
         }
     }
     
+    //定时轮播间隔
     var duration: NSInteger = 0 {
         didSet {
             if duration > 0 {
                 self.creatTimer()
+            }
+        }
+    }
+    
+    //是否暂停定时器
+    var isTimerFire = true {
+        didSet {
+            if isTimerFire {
+                timer!.fireDate = NSDate.distantPast()
+            }else {
+                timer!.fireDate = NSDate.distantFuture()
             }
         }
     }
@@ -48,6 +60,8 @@ class YzCarouselImage: UIView ,UIScrollViewDelegate{
     
     private var currentIndex : NSInteger = 0
     private var timer: NSTimer?
+    
+    
     //class func to creat carouselview
     class func carouselView(frame: CGRect, superView: UIView ) -> YzCarouselImage {
         let carouselview = YzCarouselImage.init(frame: frame)
@@ -55,8 +69,6 @@ class YzCarouselImage: UIView ,UIScrollViewDelegate{
         return carouselview
         
     }
-    
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -98,7 +110,7 @@ class YzCarouselImage: UIView ,UIScrollViewDelegate{
             imagesArray.count - 1 :
             currentIndex - 1;
         preImageView.image = imagesArray[preIndex] as? UIImage
-        // 右侧叶
+        // 右侧页
         let nextIndex: NSInteger = currentIndex + 1 == imagesArray.count ?
             0 : self.currentIndex + 1;
         nextImageView.image = imagesArray[nextIndex] as? UIImage
@@ -121,7 +133,7 @@ class YzCarouselImage: UIView ,UIScrollViewDelegate{
     
     private func creatTimer() {
         timer = NSTimer.init(timeInterval:NSNumber.init(integer: duration).doubleValue , target: self, selector:#selector(YzCarouselImage.timerUpdatePage) , userInfo: nil, repeats: true)
-        NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSRunLoopCommonModes)
+        NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
     }
     
     @objc private func timerUpdatePage() {

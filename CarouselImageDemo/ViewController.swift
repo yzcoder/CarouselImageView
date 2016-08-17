@@ -10,25 +10,29 @@ import UIKit
 private let ScreenWidth: CGFloat = UIScreen.mainScreen().bounds.width
 class ViewController: UIViewController {
 
+    @IBOutlet weak var editLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let frame = CGRectMake(0, 100, ScreenWidth, ScreenWidth)
-        
+        let frame = self.view.bounds
         
         let carouselImageView = YzCarouselImage.carouselView(frame, superView: self.view)
         
         let  images: NSMutableArray = NSMutableArray.init(capacity: 5)
         
         
-        for index in 1...5 {
+        for index in 1...6 {
             let imageName: NSString = String(index)
             let image: UIImage = UIImage.init(named: imageName as String)!
             images.addObject(image)
         }
         carouselImageView.imagesArray = images
-        carouselImageView.duration = 1
+        carouselImageView.duration = 3
+        
+        
+        
+        self.view.bringSubviewToFront(editLabel)
     }
 
     override func didReceiveMemoryWarning() {
