@@ -1,6 +1,6 @@
 # CarouselImageView
 A pictures-carousel-view by swift.
-#How to ues ？ It's easy.
+#How to use ？ It's easy.
 ```
  /**
  类方法生成对象
